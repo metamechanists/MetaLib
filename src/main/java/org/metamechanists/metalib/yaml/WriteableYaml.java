@@ -1,5 +1,6 @@
 package org.metamechanists.metalib.yaml;
 
+import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
@@ -11,6 +12,7 @@ public class WriteableYaml {
     private static final long savePeriod = 18000L;
 
     private final Plugin plugin;
+    @Getter
     private final File file;
     private final YamlConfiguration config;
 
@@ -29,6 +31,16 @@ public class WriteableYaml {
 
     public YamlTraverser getTraverser() {
         return new YamlTraverser(plugin, config);
+    }
+
+    public void createIfNotExists() {
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void save() {
