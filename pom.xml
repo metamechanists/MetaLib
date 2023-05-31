@@ -96,8 +96,8 @@
 
     <distributionManagement>
         <repository>
-            <id>my-domain-repository</id>
-            <url>repo.metamechanists.org/releases</url>
+            <id>repo.metamechanists.org</id>
+            <url>repo.metamechanists.org/#/releases</url>
         </repository>
     </distributionManagement>
 </project>
