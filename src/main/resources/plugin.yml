@@ -1,0 +1,4 @@
+name: MetaLib
+version: '${project.version}'
+main: org.metamechanists.metalib.MetaLib
+api-version: 1.19
