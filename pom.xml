@@ -96,7 +96,7 @@
 
     <distributionManagement>
         <repository>
-            <id>repo.metamechanists.org</id>
+            <id>metamechanists-repo</id>
             <url>repo.metamechanists.org/#/releases</url>
         </repository>
     </distributionManagement>
