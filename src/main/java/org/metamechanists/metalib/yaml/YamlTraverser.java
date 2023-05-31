@@ -68,6 +68,13 @@ public class YamlTraverser {
         }
         return (T) section.get(key);
     }
+    public <T> T get(String key, T defaultValue) {
+        T value = get(key, false);
+        if (value == null) {
+            value = defaultValue;
+        }
+        return value;
+    }
     public <T> T get(String key) {
         return get(key, true);
     }
