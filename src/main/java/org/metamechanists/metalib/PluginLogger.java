@@ -6,9 +6,11 @@ import org.bukkit.plugin.Plugin;
 @SuppressWarnings("unused")
 public class PluginLogger {
     private Plugin plugin;
+    private LanguageStorage languageStorage;
 
-    public void Init(Plugin plugin_) {
+    public void Init(Plugin plugin_, LanguageStorage languageStorage_) {
         plugin = plugin_;
+        languageStorage = languageStorage_;
     }
 
     public void info(String message) {
@@ -25,16 +27,16 @@ public class PluginLogger {
 
     @SafeVarargs
     public final void infoLanguageEntry(String path, ImmutablePair<String, Object>... args) {
-        info(LanguageStorage.getLanguageEntry(path, args));
+        info(languageStorage.getLanguageEntry(path, args));
     }
 
     @SafeVarargs
     public final void warningLanguageEntry(String path, ImmutablePair<String, Object>... args) {
-        warning(LanguageStorage.getLanguageEntry(path, args));
+        warning(languageStorage.getLanguageEntry(path, args));
     }
 
     @SafeVarargs
     public final void severeLanguageEntry(String path, ImmutablePair<String, Object>... args) {
-        severe(LanguageStorage.getLanguageEntry(path, args));
+        severe(languageStorage.getLanguageEntry(path, args));
     }
 }
