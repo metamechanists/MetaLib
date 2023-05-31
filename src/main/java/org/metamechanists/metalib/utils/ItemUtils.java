@@ -134,4 +134,14 @@ public class ItemUtils {
 
         return ChatColor.WHITE + ChatUtils.humanize(itemStack.getType().name());
     }
+
+    public static String toId(String string) {
+        final StringBuilder id = new StringBuilder();
+        for (char character : net.md_5.bungee.api.ChatColor.stripColor(string).replace(" ", "_").toCharArray()) {
+            if (Character.isLetterOrDigit(character)) {
+                id.append(character);
+            }
+        }
+        return id.toString();
+    }
 }
