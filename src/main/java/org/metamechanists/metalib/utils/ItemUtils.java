@@ -15,27 +15,22 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.metamechanists.metalib.MetaLib;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 
 @SuppressWarnings("unused")
 public class ItemUtils {
-    private final Plugin plugin;
 
-    public ItemUtils(Plugin plugin) {
-        this.plugin = plugin;
-    }
-
-    private ItemGroup errorGroup() {
+    private static ItemGroup errorGroup() {
         return new ItemGroup(
-                new NamespacedKey(plugin, "error_group"),
+                new NamespacedKey(MetaLib.getInstance(), "error_group"),
                 new CustomItemStack(Material.BARRIER, "&cError Group"));
     }
 
-    public ItemGroup getItemGroup(String id) {
+    public static ItemGroup getItemGroup(String id) {
         final String[] pair = id.split(":");
         final String itemGroupId = pair[0];
         final String itemId = pair[1];
