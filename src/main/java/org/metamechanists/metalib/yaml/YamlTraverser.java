@@ -1,6 +1,5 @@
 package org.metamechanists.metalib.yaml;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -49,10 +48,10 @@ public class YamlTraverser {
         return getSection(key, true);
     }
 
-    public Set<ImmutablePair<String, YamlTraverser>> getSections() {
-        Set<ImmutablePair<String, YamlTraverser>> set = new HashSet<>();
+    public Set<ConfigPair<String, YamlTraverser>> getSections() {
+        Set<ConfigPair<String, YamlTraverser>> set = new HashSet<>();
         for (String key : section.getKeys(false)) {
-             set.add(new ImmutablePair<>(key, new YamlTraverser(plugin, section.getConfigurationSection(key))));
+             set.add(new ConfigPair<>(key, new YamlTraverser(plugin, section.getConfigurationSection(key))));
         }
         return set;
     }
