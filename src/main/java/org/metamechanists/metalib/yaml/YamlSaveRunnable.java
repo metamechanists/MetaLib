@@ -3,8 +3,8 @@ package org.metamechanists.metalib.yaml;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class YamlSaveRunnable extends BukkitRunnable {
-    final private YamlStorage yamlFile;
-    public YamlSaveRunnable(YamlStorage yamlFile) {
+    final private WriteableYaml yamlFile;
+    public YamlSaveRunnable(WriteableYaml yamlFile) {
         this.yamlFile = yamlFile;
     }
 
