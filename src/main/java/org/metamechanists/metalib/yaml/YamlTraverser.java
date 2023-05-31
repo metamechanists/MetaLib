@@ -5,6 +5,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class YamlTraverser {
@@ -44,6 +46,14 @@ public class YamlTraverser {
     }
     public YamlTraverser getSection(String key) {
         return getSection(key, true);
+    }
+
+    public Map<String, YamlTraverser> getSections() {
+        Map<String, YamlTraverser> map = new HashMap<>();
+        for (String key : section.getKeys(false)) {
+             map.put(key, new YamlTraverser(plugin, section.getConfigurationSection(key)));
+        }
+        return map;
     }
 
     @SuppressWarnings("unchecked")
