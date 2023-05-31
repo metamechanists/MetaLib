@@ -9,13 +9,11 @@ import org.metamechanists.metalib.yaml.YamlTraverser;
 @SuppressWarnings("unused")
 public class LanguageStorage {
 
-    private Plugin plugin;
-    private YamlTraverser languageTraverser;
-    private String prefix;
+    private final Plugin plugin;
+    private final YamlTraverser languageTraverser;
+    private final String prefix;
 
-    private LanguageStorage() {}
-
-    public void Init(Plugin plugin_) {
+    public LanguageStorage(Plugin plugin_) {
         plugin = plugin_;
         languageTraverser = new YamlTraverser(plugin, "language.yml");
         prefix  = getLanguageEntry("general.prefix");
