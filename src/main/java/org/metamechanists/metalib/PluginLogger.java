@@ -5,12 +5,12 @@ import org.bukkit.plugin.Plugin;
 
 @SuppressWarnings("unused")
 public class PluginLogger {
-    private Plugin plugin;
-    private LanguageStorage languageStorage;
+    private final Plugin plugin;
+    private final LanguageStorage languageStorage;
 
-    public void Init(Plugin plugin_, LanguageStorage languageStorage_) {
-        plugin = plugin_;
-        languageStorage = languageStorage_;
+    public PluginLogger(Plugin plugin, LanguageStorage languageStorage) {
+        this.plugin = plugin;
+        this.languageStorage = languageStorage;
     }
 
     public void info(String message) {
