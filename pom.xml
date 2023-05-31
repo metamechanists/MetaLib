@@ -87,6 +87,13 @@
         </dependency>
 
         <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.86.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.discordsrv</groupId>
             <artifactId>discordsrv</artifactId>
             <version>1.26.0</version>
