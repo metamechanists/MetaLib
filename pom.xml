@@ -93,4 +93,11 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>my-domain-repository</id>
+            <url>repo.metamechanists.org/releases</url>
+        </repository>
+    </distributionManagement>
 </project>
