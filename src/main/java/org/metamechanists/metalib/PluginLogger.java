@@ -1,6 +1,6 @@
 package org.metamechanists.metalib;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import org.bukkit.plugin.Plugin;
 
 @SuppressWarnings("unused")
@@ -26,17 +26,17 @@ public class PluginLogger {
     }
 
     @SafeVarargs
-    public final void infoLanguageEntry(String path, ImmutablePair<String, Object>... args) {
+    public final void infoLanguageEntry(String path, Pair<String, Object>... args) {
         info(languageStorage.getLanguageEntry(path, args));
     }
 
     @SafeVarargs
-    public final void warningLanguageEntry(String path, ImmutablePair<String, Object>... args) {
+    public final void warningLanguageEntry(String path, Pair<String, Object>... args) {
         warning(languageStorage.getLanguageEntry(path, args));
     }
 
     @SafeVarargs
-    public final void severeLanguageEntry(String path, ImmutablePair<String, Object>... args) {
+    public final void severeLanguageEntry(String path, Pair<String, Object>... args) {
         severe(languageStorage.getLanguageEntry(path, args));
     }
 }

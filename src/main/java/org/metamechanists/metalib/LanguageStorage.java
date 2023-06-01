@@ -1,6 +1,6 @@
 package org.metamechanists.metalib;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.metamechanists.metalib.utils.ColorUtils;
@@ -20,12 +20,12 @@ public class LanguageStorage {
     }
 
     @SafeVarargs
-    private String fillPlaceholders(String message, ImmutablePair<String, Object>... args) {
+    private String fillPlaceholders(String message, Pair<String, Object>... args) {
         String filledMessage = message;
 
-        for (ImmutablePair<String, Object> placeholderInfo : args) {
-            String key = placeholderInfo.getKey();
-            Object rawValue = placeholderInfo.getValue();
+        for (Pair<String, Object> placeholderInfo : args) {
+            String key = placeholderInfo.getFirstValue();
+            Object rawValue = placeholderInfo.getSecondValue();
 
             if (rawValue instanceof Player value) {
                 filledMessage = filledMessage.replace("{" + key + "}", value.getName());
@@ -52,7 +52,7 @@ public class LanguageStorage {
     }
 
     @SafeVarargs
-    public final String getLanguageEntry(String path, boolean usePrefix, ImmutablePair<String, Object>... args) {
+    public final String getLanguageEntry(String path, boolean usePrefix, Pair<String, Object>... args) {
         String message = usePrefix ? prefix : "";
         message += languageTraverser.get(path);
         message = fillPlaceholders(message, args);
@@ -62,7 +62,7 @@ public class LanguageStorage {
     }
 
     @SafeVarargs
-    public final String getLanguageEntry(String path, ImmutablePair<String, Object>... args) {
+    public final String getLanguageEntry(String path, Pair<String, Object>... args) {
         return getLanguageEntry(path, false, args);
     }
 }
