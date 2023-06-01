@@ -30,7 +30,7 @@ public class WriteableYaml {
     }
 
     public YamlTraverser getTraverser() {
-        return new YamlTraverser(plugin, config);
+        return new YamlTraverser(plugin, file);
     }
 
     public void createIfNotExists() {

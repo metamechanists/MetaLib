@@ -13,31 +13,35 @@ public class YamlTraverser {
 
     private final Plugin plugin;
     private final ConfigurationSection section;
+    private final String rootName;
 
-    public YamlTraverser(Plugin plugin, ConfigurationSection section) {
+    private YamlTraverser(Plugin plugin, ConfigurationSection section, String rootName) {
         this.plugin = plugin;
         this.section = section;
+        this.rootName = rootName;
     }
 
     public YamlTraverser(Plugin plugin, File file) {
         this.plugin = plugin;
         this.section = YamlConfiguration.loadConfiguration(file);
+        this.rootName = file.getName();
     }
 
     public YamlTraverser(Plugin plugin, String path) {
         this.plugin = plugin;
         this.section = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), path));
+        this.rootName = path;
     }
 
     private void logMissingKey(String key) {
-        plugin.getLogger().severe("Could not find " + section.getName() + "." + section.getCurrentPath() + "." + key);
+        plugin.getLogger().severe("Could not find " + rootName + "." + section.getCurrentPath() + "." + key);
     }
 
     public YamlTraverser getSection(String key, boolean throwsError) {
         if (throwsError && section.getConfigurationSection(key) == null) {
             logMissingKey(key);
         }
-        return new YamlTraverser(plugin, section.getConfigurationSection(key));
+        return new YamlTraverser(plugin, section.getConfigurationSection(key), rootName);
     }
     public YamlTraverser getSection(String key) {
         return getSection(key, true);
@@ -46,7 +50,7 @@ public class YamlTraverser {
     public Set<YamlTraverser> getSections() {
         Set<YamlTraverser> set = new HashSet<>();
         for (String key : section.getKeys(false)) {
-             set.add(new YamlTraverser(plugin, section.getConfigurationSection(key)));
+             set.add(new YamlTraverser(plugin, section.getConfigurationSection(key), rootName));
         }
         return set;
     }
