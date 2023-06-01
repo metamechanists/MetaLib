@@ -47,8 +47,7 @@ public class LanguageStorage {
 
     private String fillColors(String message) {
         while (message.contains("{#")) {
-            final String rawHex = message.substring(message.indexOf("{#")+3, message.indexOf("{#")+9);
-            plugin.getLogger().severe("FUCK YOU JAVA " + rawHex);
+            final String rawHex = message.substring(message.indexOf("{#")+2, message.indexOf("{#")+8);
             message = message.replace("{#" + rawHex + "}", ColorUtils.getHexFromString(rawHex));
         }
         return message;
