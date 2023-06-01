@@ -57,6 +57,9 @@ public class YamlTraverser {
         return set;
     }
 
+    public String name() {
+        return section.getName();
+    }
     @SuppressWarnings("unchecked")
     public <T> T get(String key, boolean throwsError) {
         if (throwsError) {
