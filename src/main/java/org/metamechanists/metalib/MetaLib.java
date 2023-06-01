@@ -14,7 +14,7 @@ public final class MetaLib extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        // Don't need to do anything yet
     }
 
     public static MetaLib getInstance() {

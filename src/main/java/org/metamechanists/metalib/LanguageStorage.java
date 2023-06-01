@@ -1,6 +1,6 @@
 package org.metamechanists.metalib;
 
-import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
+import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -14,17 +14,17 @@ public class LanguageStorage {
     private final YamlTraverser languageTraverser;
     private final String prefix;
 
-    public LanguageStorage(Plugin plugin_) {
-        plugin = plugin_;
-        languageTraverser = new YamlTraverser(plugin, "language.yml");
-        prefix = getLanguageEntry("general.prefix");
+    public LanguageStorage(Plugin plugin) {
+        this.plugin = plugin;
+        this.languageTraverser = new YamlTraverser(plugin, "language.yml");
+        this.prefix = getLanguageEntry("general.prefix");
     }
 
     @SafeVarargs
     private String fillPlaceholders(String message, Pair<String, Object>... args) {
         for (Pair<String, Object> placeholderInfo : args) {
-            String key = placeholderInfo.getFirstValue();
-            Object rawValue = placeholderInfo.getSecondValue();
+            String key = placeholderInfo.left();
+            Object rawValue = placeholderInfo.right();
 
             if (rawValue instanceof Player value) {
                 message = message.replace("{" + key + "}", value.getName());

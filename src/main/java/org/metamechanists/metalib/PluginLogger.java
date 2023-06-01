@@ -1,6 +1,6 @@
 package org.metamechanists.metalib;
 
-import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
+import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.plugin.Plugin;
 
 @SuppressWarnings("unused")
