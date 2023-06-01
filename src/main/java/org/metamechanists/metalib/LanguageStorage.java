@@ -1,12 +1,10 @@
 package org.metamechanists.metalib;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
-import lombok.var;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.metamechanists.metalib.utils.ColorUtils;
-import org.metamechanists.metalib.yaml.WriteableYaml;
 import org.metamechanists.metalib.yaml.YamlTraverser;
 
 @SuppressWarnings("unused")
@@ -53,11 +51,13 @@ public class LanguageStorage {
 
     @SafeVarargs
     public final String getLanguageEntry(String path, boolean usePrefix, Pair<String, Object>... args) {
-        String message = usePrefix ? prefix : "";
-        message += languageTraverser.get(path);
-        if (message == null) {
+        final String messagePrefix = usePrefix ? prefix : "";
+        final String rawMessage = languageTraverser.get(path);
+        if (rawMessage == null) {
             return ChatColor.RED + "Language file entry missing. Contact a server admin and show them this message!";
         }
+
+        String message = messagePrefix + rawMessage;
         message = fillPlaceholders(message, args);
         message = ColorUtils.formatColors(message);
         message = fillColors(message);
