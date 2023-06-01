@@ -13,6 +13,11 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class YamlTraverser {
 
+    public enum ErrorSetting {
+        LOG_MISSING_KEY,
+        NO_BEHAVIOUR
+    }
+
     private final Plugin plugin;
     private final ConfigurationSection section;
     private final String rootName;
@@ -39,14 +44,14 @@ public class YamlTraverser {
         plugin.getLogger().severe("Could not find " + rootName + "." + section.getCurrentPath() + "." + key);
     }
 
-    public @Nullable YamlTraverser getSection(String key, boolean throwsError) {
-        if (throwsError && section.getConfigurationSection(key) == null) {
+    public @Nullable YamlTraverser getSection(String key, ErrorSetting errorSetting) {
+        if (errorSetting == ErrorSetting.LOG_MISSING_KEY && section.getConfigurationSection(key) == null) {
             logMissingKey(key);
         }
         return new YamlTraverser(plugin, section.getConfigurationSection(key), rootName);
     }
     public @Nullable YamlTraverser getSection(String key) {
-        return getSection(key, true);
+        return getSection(key, ErrorSetting.LOG_MISSING_KEY);
     }
 
     public List<YamlTraverser> getSections() {
@@ -61,21 +66,21 @@ public class YamlTraverser {
         return section.getName();
     }
     @SuppressWarnings("unchecked")
-    public <T> @Nullable T get(String key, boolean throwsError) {
-        if (throwsError && section.get(key) == null) {
+    public <T> @Nullable T get(String key, ErrorSetting errorSetting) {
+        if (errorSetting == ErrorSetting.LOG_MISSING_KEY && section.get(key) == null) {
             logMissingKey(key);
         }
         return (T) section.get(key);
     }
     public <T> @NonNull T get(String key, T defaultValue) {
-        T value = get(key, false);
+        T value = get(key, ErrorSetting.NO_BEHAVIOUR);
         if (value == null) {
             value = defaultValue;
         }
         return value;
     }
     public <T> @Nullable T get(String key) {
-        return get(key, true);
+        return get(key, ErrorSetting.LOG_MISSING_KEY);
     }
 
     public <T> void set(String key, T value) {
