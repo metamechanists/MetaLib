@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.metamechanists.metalib.utils.ColorUtils;
+import org.metamechanists.metalib.yaml.WriteableYaml;
 import org.metamechanists.metalib.yaml.YamlTraverser;
 
 @SuppressWarnings("unused")
@@ -17,7 +18,7 @@ public class LanguageStorage {
     public LanguageStorage(Plugin plugin_) {
         plugin = plugin_;
         languageTraverser = new YamlTraverser(plugin, "language.yml");
-        prefix  = getLanguageEntry("general.prefix");
+        prefix = getLanguageEntry("general.prefix");
     }
 
     @SafeVarargs
@@ -47,6 +48,7 @@ public class LanguageStorage {
     private String fillColors(String message) {
         while (message.contains("{#")) {
             final String rawHex = message.substring(message.indexOf("{#")+3, message.indexOf("{#")+9);
+            plugin.getLogger().severe("FUCK YOU JAVA " + rawHex);
             message = message.replace("{#" + rawHex + "}", ColorUtils.getHexFromString(rawHex));
         }
         return message;
