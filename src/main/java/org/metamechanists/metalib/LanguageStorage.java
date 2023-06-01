@@ -1,9 +1,9 @@
 package org.metamechanists.metalib;
 
-import io.github.thebusybiscuit.slimefun4.libraries.dough.common.ChatColors;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.metamechanists.metalib.utils.ColorUtils;
 import org.metamechanists.metalib.yaml.YamlTraverser;
 
 @SuppressWarnings("unused")
@@ -43,12 +43,22 @@ public class LanguageStorage {
         return filledMessage;
     }
 
+    private String fillColors(String message) {
+        while (message.contains("{#")) {
+            final String rawHex = message.substring(message.indexOf("{#")+3, message.indexOf("{#")+9);
+            message = message.replace("{#" + rawHex + "}", ColorUtils.getHexFromString(rawHex));
+        }
+        return message;
+    }
+
     @SafeVarargs
     public final String getLanguageEntry(String path, boolean usePrefix, ImmutablePair<String, Object>... args) {
-        String entry = usePrefix ? prefix : "";
-        entry += languageTraverser.get(path);
-        final String message = fillPlaceholders(prefix + entry, args);
-        return ChatColors.color(message);
+        String message = usePrefix ? prefix : "";
+        message += languageTraverser.get(path);
+        message = fillPlaceholders(message, args);
+        message = ColorUtils.formatColors(message);
+        message = fillColors(message);
+        return message;
     }
 
     @SafeVarargs
