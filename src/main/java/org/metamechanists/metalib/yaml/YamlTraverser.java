@@ -1,5 +1,6 @@
 package org.metamechanists.metalib.yaml;
 
+import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -48,10 +49,10 @@ public class YamlTraverser {
         return getSection(key, true);
     }
 
-    public Set<ConfigPair<String, YamlTraverser>> getSections() {
-        Set<ConfigPair<String, YamlTraverser>> set = new HashSet<>();
+    public Set<Pair<String, YamlTraverser>> getSections() {
+        Set<Pair<String, YamlTraverser>> set = new HashSet<>();
         for (String key : section.getKeys(false)) {
-             set.add(new ConfigPair<>(key, new YamlTraverser(plugin, section.getConfigurationSection(key))));
+             set.add(new Pair<>(key, new YamlTraverser(plugin, section.getConfigurationSection(key))));
         }
         return set;
     }
