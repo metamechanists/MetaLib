@@ -17,7 +17,7 @@ public class YamlTraverser {
     private final ConfigurationSection section;
     private final String rootName;
 
-    private YamlTraverser(Plugin plugin, ConfigurationSection section, String rootName) {
+    public YamlTraverser(Plugin plugin, ConfigurationSection section, String rootName) {
         this.plugin = plugin;
         this.section = section;
         this.rootName = rootName;
