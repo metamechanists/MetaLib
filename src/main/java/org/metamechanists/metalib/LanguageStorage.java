@@ -1,6 +1,7 @@
 package org.metamechanists.metalib;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
+import lombok.var;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -23,32 +24,29 @@ public class LanguageStorage {
 
     @SafeVarargs
     private String fillPlaceholders(String message, Pair<String, Object>... args) {
-        String filledMessage = message;
-
         for (Pair<String, Object> placeholderInfo : args) {
             String key = placeholderInfo.getFirstValue();
             Object rawValue = placeholderInfo.getSecondValue();
 
             if (rawValue instanceof Player value) {
-                filledMessage = filledMessage.replace("{" + key + "}", value.getName());
+                message = message.replace("{" + key + "}", value.getName());
             } else if (rawValue instanceof String value) {
-                filledMessage = filledMessage.replace("{" + key + "}", value);
+                message = message.replace("{" + key + "}", value);
             } else if (rawValue instanceof Integer value) {
-                filledMessage = filledMessage.replace("{" + key + "}", value.toString());
+                message = message.replace("{" + key + "}", value.toString());
             } else if (rawValue instanceof Double value) {
-                filledMessage = filledMessage.replace("{" + key + "}", value.toString());
+                message = message.replace("{" + key + "}", value.toString());
             } else {
                 plugin.getLogger().severe("Could not substitute placeholder of type " + rawValue.getClass());
             }
         }
 
-        return filledMessage;
+        return message;
     }
 
     private String fillColors(String message) {
-        while (message.contains("{#")) {
-            final String rawHex = message.substring(message.indexOf("{#")+2, message.indexOf("{#")+8);
-            message = message.replace("{#" + rawHex + "}", ColorUtils.getHexFromString(rawHex));
+        for (var colorPair : ColorUtils.getColorMap().entrySet()) {
+            message = message.replace("{" + colorPair.getKey() + "}", colorPair.getValue());
         }
         return message;
     }
