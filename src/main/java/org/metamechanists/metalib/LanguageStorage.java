@@ -44,9 +44,15 @@ public class LanguageStorage {
     }
 
     @SafeVarargs
-    public final String getLanguageEntry(String path, ImmutablePair<String, Object>... args) {
-        String entry = languageTraverser.get(path);
-        String message = fillPlaceholders(prefix + entry, args);
+    public final String getLanguageEntry(String path, boolean usePrefix, ImmutablePair<String, Object>... args) {
+        String entry = usePrefix ? prefix : "";
+        entry += languageTraverser.get(path);
+        final String message = fillPlaceholders(prefix + entry, args);
         return ChatColors.color(message);
+    }
+
+    @SafeVarargs
+    public final String getLanguageEntry(String path, ImmutablePair<String, Object>... args) {
+        return getLanguageEntry(path, false, args);
     }
 }
