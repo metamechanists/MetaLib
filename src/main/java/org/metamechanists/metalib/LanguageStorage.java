@@ -1,6 +1,7 @@
 package org.metamechanists.metalib;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.metamechanists.metalib.utils.ColorUtils;
@@ -55,6 +56,9 @@ public class LanguageStorage {
     public final String getLanguageEntry(String path, boolean usePrefix, Pair<String, Object>... args) {
         String message = usePrefix ? prefix : "";
         message += languageTraverser.get(path);
+        if (message == null) {
+            return ChatColor.RED + "Language file entry missing. Contact a server admin and show them this message!";
+        }
         message = fillPlaceholders(message, args);
         message = ColorUtils.formatColors(message);
         message = fillColors(message);
