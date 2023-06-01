@@ -49,10 +49,10 @@ public class YamlTraverser {
         return getSection(key, true);
     }
 
-    public Set<Pair<String, YamlTraverser>> getSections() {
-        Set<Pair<String, YamlTraverser>> set = new HashSet<>();
+    public Set<YamlTraverser> getSections() {
+        Set<YamlTraverser> set = new HashSet<>();
         for (String key : section.getKeys(false)) {
-             set.add(new Pair<>(key, new YamlTraverser(plugin, section.getConfigurationSection(key))));
+             set.add(new YamlTraverser(plugin, section.getConfigurationSection(key)));
         }
         return set;
     }
