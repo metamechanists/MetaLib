@@ -1,6 +1,5 @@
 package org.metamechanists.metalib.yaml;
 
-import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -35,13 +34,8 @@ public class YamlTraverser {
     }
 
     public YamlTraverser getSection(String key, boolean throwsError) {
-        if (throwsError) {
-            try {
-                section.getConfigurationSection(key);
-            } catch (Exception e) {
-                logMissingKey(key);
-                e.printStackTrace();
-            }
+        if (throwsError && section.getConfigurationSection(key) == null) {
+            logMissingKey(key);
         }
         return new YamlTraverser(plugin, section.getConfigurationSection(key));
     }
@@ -62,13 +56,8 @@ public class YamlTraverser {
     }
     @SuppressWarnings("unchecked")
     public <T> T get(String key, boolean throwsError) {
-        if (throwsError) {
-            try {
-                T unused = (T) section.get(key);
-            } catch (ClassCastException e) {
-                logMissingKey(key);
-                e.printStackTrace();
-            }
+        if (throwsError && section.get(key) == null) {
+            logMissingKey(key);
         }
         return (T) section.get(key);
     }
