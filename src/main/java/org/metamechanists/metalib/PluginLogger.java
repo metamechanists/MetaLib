@@ -1,7 +1,8 @@
 package org.metamechanists.metalib;
 
-import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.plugin.Plugin;
+import org.metamechanists.metalib.language.LanguageStorage;
+import org.metamechanists.metalib.language.PlaceholderPair;
 
 @SuppressWarnings("unused")
 public class PluginLogger {
@@ -26,17 +27,17 @@ public class PluginLogger {
     }
 
     @SafeVarargs
-    public final void infoLanguageEntry(String path, Pair<String, Object>... args) {
+    public final void infoLanguageEntry(String path, PlaceholderPair<Object>... args) {
         info(languageStorage.getLanguageEntry(path, args));
     }
 
     @SafeVarargs
-    public final void warningLanguageEntry(String path, Pair<String, Object>... args) {
+    public final void warningLanguageEntry(String path, PlaceholderPair<Object>... args) {
         warning(languageStorage.getLanguageEntry(path, args));
     }
 
     @SafeVarargs
-    public final void severeLanguageEntry(String path, Pair<String, Object>... args) {
+    public final void severeLanguageEntry(String path, PlaceholderPair<Object>... args) {
         severe(languageStorage.getLanguageEntry(path, args));
     }
 }

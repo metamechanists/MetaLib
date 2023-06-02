@@ -1,6 +1,5 @@
-package org.metamechanists.metalib;
+package org.metamechanists.metalib.language;
 
-import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -21,10 +20,10 @@ public class LanguageStorage {
     }
 
     @SafeVarargs
-    private String fillPlaceholders(String message, Pair<String, Object>... args) {
-        for (Pair<String, Object> placeholderInfo : args) {
-            String key = placeholderInfo.left();
-            Object rawValue = placeholderInfo.right();
+    private String fillPlaceholders(String message, PlaceholderPair<Object>... args) {
+        for (PlaceholderPair<Object> placeholderInfo : args) {
+            final String key = placeholderInfo.key();
+            final Object rawValue = placeholderInfo.value();
 
             if (rawValue instanceof Player value) {
                 message = message.replace("{" + key + "}", value.getName());
@@ -50,7 +49,7 @@ public class LanguageStorage {
     }
 
     @SafeVarargs
-    public final String getLanguageEntry(String path, boolean usePrefix, Pair<String, Object>... args) {
+    public final String getLanguageEntry(String path, boolean usePrefix, PlaceholderPair<Object>... args) {
         final String messagePrefix = usePrefix ? prefix : "";
         final String rawMessage = languageTraverser.get(path);
         if (rawMessage == null) {
@@ -65,7 +64,7 @@ public class LanguageStorage {
     }
 
     @SafeVarargs
-    public final String getLanguageEntry(String path, Pair<String, Object>... args) {
+    public final String getLanguageEntry(String path, PlaceholderPair<Object>... args) {
         return getLanguageEntry(path, false, args);
     }
 }
