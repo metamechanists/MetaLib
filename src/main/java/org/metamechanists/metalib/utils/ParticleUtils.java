@@ -1,10 +1,10 @@
 package org.metamechanists.metalib.utils;
 
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
@@ -30,12 +30,15 @@ public class ParticleUtils {
         }
     }
 
+    private static Vector generateRandomOffset(boolean setRandom) {
+        return setRandom ? new Vector(RandomUtils.randomDouble(), RandomUtils.randomDouble(), RandomUtils.randomDouble()) : new Vector();
+    }
+
     public static void randomParticle(Location location, Particle particle, double radius, int count) {
         for(int i = 0; i < count; ++i) {
             randomParticle(location, particle, radius);
         }
     }
-
     public static void randomParticle(Location location, Particle particle, double radius) {
         double x = ThreadLocalRandom.current().nextDouble(-radius, radius + 0.1);
         double y = ThreadLocalRandom.current().nextDouble(-radius, radius + 0.1);
@@ -61,12 +64,10 @@ public class ParticleUtils {
             startVector.add(vector);
         }
     }
-
     public static void highlightBlock(Player player, Block block, Particle particle, Particle.DustOptions dustOptions) {
         drawSquareCorners(player, block.getLocation(), 1, particle, dustOptions);
         drawSquareCorners(player, block.getLocation().add(0, 1, 0), 1, particle, dustOptions);
     }
-
     public static void drawSquareCorners(Player player, Location corner, int length, Particle particle, Particle.DustOptions dustOptions) {
         player.spawnParticle(particle, corner.getX(), corner.getY(), corner.getZ(), 1, dustOptions);
         player.spawnParticle(particle, corner.getX() + length, corner.getY(), corner.getZ(), 1, dustOptions);
@@ -77,15 +78,12 @@ public class ParticleUtils {
     public static void sphereIn(Location location, Particle particle) {
         sphereIn(location, particle, 1.0, false);
     }
-
     public static void sphereIn(Location location, Particle particle, double speed) {
         sphereIn(location, particle, speed, false);
     }
-
     public static void sphereIn(Location location, Particle particle, boolean randomOffset) {
         sphereIn(location, particle, 1.0, randomOffset);
     }
-
     public static void sphereIn(Location location, Particle particle, double speed, boolean randomOffset) {
         final World world = location.getWorld();
         for (double[] offsets : sphere) {
@@ -94,7 +92,6 @@ public class ParticleUtils {
             world.spawnParticle(particle, particleLocation, 0, direction.getX(), direction.getY(), direction.getZ(), speed);
         }
     }
-
     public static void spheresUp(Location location, Particle particle) {
         final World world = location.getWorld();
         double[] speeds = new double[] {0.1, 0.15, 0.2, 0.25,};
@@ -102,19 +99,15 @@ public class ParticleUtils {
             world.spawnParticle(particle, location.clone().add(offsets[0], offsets[1], offsets[2]), 0, 0, 5, 0, speeds[new Random().nextInt(0, speeds.length)]);
         }
     }
-
     public static void sphereOut(Location location, Particle particle) {
         sphereOut(location, particle, 0.25, false);
     }
-
     public static void sphereOut(Location location, Particle particle, double speed) {
         sphereOut(location, particle, speed, false);
     }
-
     public static void sphereOut(Location location, Particle particle, boolean randomOffset) {
         sphereOut(location, particle, 0.25, randomOffset);
     }
-
     public static void sphereOut(Location location, Particle particle, double speed, boolean randomOffset) {
         final World world = location.getWorld();
         location = location.clone().add(0, 0.5, 0);
@@ -124,7 +117,6 @@ public class ParticleUtils {
             world.spawnParticle(particle, particleLocation, 0, direction.getX(), direction.getY(), direction.getZ(), speed);
         }
     }
-
     public static void sphere(Location location, Particle particle, double scale, boolean randomOffset) {
         final World world = location.getWorld();
         location = location.clone().add(0, 0.5, 0);
@@ -134,7 +126,16 @@ public class ParticleUtils {
         }
     }
 
-    private static Vector generateRandomOffset(boolean setRandom) {
-        return setRandom ? new Vector(RandomUtils.randomDouble(), RandomUtils.randomDouble(), RandomUtils.randomDouble()) : new Vector();
+    public static void enchantingBottle(Location location) {
+        final double scale = 0.3;
+        for (double[] offsets : sphere) {
+            final Location particleLocation = location.clone().add(offsets[0] * scale, offsets[1] * scale, offsets[2] * scale);
+            location.getWorld().spawnParticle(Particle.SPELL_MOB, particleLocation, 0, 54 / 255F, 90 / 255F, 192 / 255F);
+        }
+        location.getWorld().playSound(location, Sound.ENTITY_SPLASH_POTION_BREAK, 0.5F, 1);
+        location.getWorld().spawnParticle(Particle.ITEM_CRACK, location, 2, 0.2, 0.2, 0.2, 0, new ItemStack(Material.GLASS_BOTTLE));
+
+        final ExperienceOrb experienceOrb = location.getWorld().spawn(location, ExperienceOrb.class);
+        experienceOrb.setExperience(RandomUtils.randomInteger(3, 12));
     }
 }
