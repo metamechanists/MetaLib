@@ -6,7 +6,7 @@
 
     <groupId>org.metamechanists</groupId>
     <artifactId>MetaLib</artifactId>
-    <version>21</version>
+    <version>22</version>
     <packaging>jar</packaging>
 
     <name>MetaLib</name>
@@ -29,6 +29,14 @@
                         <relocation>
                             <pattern>io.github.bakedlibs.dough</pattern>
                             <shadedPattern>org.metamechanists.metalib.dough</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>dev.sefiraat.sefilib</pattern>
+                            <shadedPattern>org.metamechanists.metamachines.sefilib</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>de.tr7zw.changeme.nbtapi</pattern>
+                            <shadedPattern>org.metamechanists.metamachines.nbtapi</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>
@@ -89,13 +97,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.Slimefun</groupId>
-            <artifactId>Slimefun4</artifactId>
-            <version>ddb7ebd134</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
@@ -110,17 +111,38 @@
         </dependency>
 
         <dependency>
-            <groupId>com.discordsrv</groupId>
-            <artifactId>discordsrv</artifactId>
-            <version>1.26.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>io.github.baked-libs</groupId>
             <artifactId>dough-api</artifactId>
             <version>1.2.0</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>de.tr7zw</groupId>
+            <artifactId>item-nbt-api-plugin</artifactId>
+            <version>2.11.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>dev.sefiraat</groupId>
+            <artifactId>SefiLib</artifactId>
+            <version>0.2.6</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.Slimefun</groupId>
+            <artifactId>Slimefun4</artifactId>
+            <version>ddb7ebd134</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.discordsrv</groupId>
+            <artifactId>discordsrv</artifactId>
+            <version>1.26.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
