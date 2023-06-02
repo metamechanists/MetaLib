@@ -31,9 +31,13 @@ public class ColorUtils {
     public static final String SOUL_LIGHT_BLUE = ColorUtils.addHexColor("SOUL_LIGHT_BLUE", "CDEEEE");
     public static final String AURELIUM_SKILL_ITEM_BLUE = ColorUtils.addHexColor("AURELIUM_SKILL_ITEM_BLUE", "6798E6");
     public static final String SLIME_TINKER_BLUE = ColorUtils.addHexColor("SLIME_TINKER_BLUE", "21588f");
+    public static final String LAVA_ORANGE = ColorUtils.addHexColor("LAVA_ORANGE", "ED6A13");
+    public static final String DRIPSTONE_BROWN = ColorUtils.addHexColor("DRIPSTONE_BROWN", "FCD2A4");
+    public static final String BLAZE_ORANGE = ColorUtils.addHexColor("BLAZE_ORANGE", "FFB805");
 
     public static final String DEEP_BLUE = ColorUtils.addHexColor("DEEP_BLUE", "03404F");
     public static final String LIGHT_BLUE = ColorUtils.addHexColor("LIGHT_BLUE", "7692C2");
+    public static final String BROWN = ColorUtils.addHexColor("BROWN", "865D49");
 
     private static String addHexColor(String name, String rawHex) {
         // "#ffffff" -> "&x&f&f&f&f&f&f
