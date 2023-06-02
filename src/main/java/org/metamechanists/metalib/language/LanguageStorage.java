@@ -14,6 +14,7 @@ public class LanguageStorage {
     private final String prefix;
 
     public LanguageStorage(Plugin plugin) {
+        plugin.saveResource("language.yml", true);
         this.plugin = plugin;
         this.languageTraverser = new YamlTraverser(plugin, "language.yml");
         this.prefix = getLanguageEntry("general.prefix");
