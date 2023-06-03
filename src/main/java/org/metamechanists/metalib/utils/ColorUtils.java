@@ -35,6 +35,7 @@ public class ColorUtils {
     public static final String LAVA_ORANGE = ColorUtils.addHexColor("LAVA_ORANGE", "ED6A13");
     public static final String DRIPSTONE_BROWN = ColorUtils.addHexColor("DRIPSTONE_BROWN", "FCD2A4");
     public static final String BLAZE_ORANGE = ColorUtils.addHexColor("BLAZE_ORANGE", "FFB805");
+    public static final String TINKERS_ARROWS_LIME = ColorUtils.addHexColor("TINKERS_ARROWS_LIME", "C2FC03");
 
     public static final String DEEP_BLUE = ColorUtils.addHexColor("DEEP_BLUE", "03404F");
     public static final String LIGHT_BLUE = ColorUtils.addHexColor("LIGHT_BLUE", "7692C2");
