@@ -1,10 +1,10 @@
 package org.metamechanists.metalib.utils;
 
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
@@ -28,6 +28,10 @@ public class ParticleUtils {
                 sphereLoc++;
             }
         }
+    }
+
+    public static double[][] getSphere() {
+        return sphere;
     }
 
     private static Vector generateRandomOffset(boolean setRandom) {
@@ -124,18 +128,5 @@ public class ParticleUtils {
             final Location particleLocation = location.clone().add(offsets[0] * scale, offsets[1] * scale, offsets[2] * scale).add(generateRandomOffset(randomOffset));
             world.spawnParticle(particle, particleLocation, 0, 0, 0, 0);
         }
-    }
-
-    public static void enchantingBottle(Location location) {
-        final double scale = 0.3;
-        for (double[] offsets : sphere) {
-            final Location particleLocation = location.clone().add(offsets[0] * scale, offsets[1] * scale, offsets[2] * scale);
-            location.getWorld().spawnParticle(Particle.SPELL_MOB, particleLocation, 0, 54 / 255F, 90 / 255F, 192 / 255F);
-        }
-        location.getWorld().playSound(location, Sound.ENTITY_SPLASH_POTION_BREAK, 0.5F, 1);
-        location.getWorld().spawnParticle(Particle.ITEM_CRACK, location, 2, 0.2, 0.2, 0.2, 0, new ItemStack(Material.GLASS_BOTTLE));
-
-        final ExperienceOrb experienceOrb = location.getWorld().spawn(location, ExperienceOrb.class);
-        experienceOrb.setExperience(RandomUtils.randomInteger(3, 12));
     }
 }

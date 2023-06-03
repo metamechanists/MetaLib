@@ -89,6 +89,8 @@
     </repositories>
 
     <dependencies>
+        <!-- Run Time Dependencies -->
+
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
@@ -111,6 +113,29 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.Slimefun</groupId>
+            <artifactId>Slimefun4</artifactId>
+            <version>ddb7ebd134</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.luckperms</groupId>
+            <artifactId>api</artifactId>
+            <version>5.4</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.discordsrv</groupId>
+            <artifactId>discordsrv</artifactId>
+            <version>1.26.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Compile Time Dependencies -->
+
+        <dependency>
             <groupId>io.github.baked-libs</groupId>
             <artifactId>dough-api</artifactId>
             <version>1.2.0</version>
@@ -129,20 +154,6 @@
             <artifactId>SefiLib</artifactId>
             <version>0.2.6</version>
             <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.Slimefun</groupId>
-            <artifactId>Slimefun4</artifactId>
-            <version>ddb7ebd134</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.discordsrv</groupId>
-            <artifactId>discordsrv</artifactId>
-            <version>1.26.0</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
