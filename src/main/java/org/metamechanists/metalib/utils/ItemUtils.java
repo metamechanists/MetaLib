@@ -1,10 +1,12 @@
 package org.metamechanists.metalib.utils;
 
 import io.github.bakedlibs.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.data.persistent.PersistentDataAPI;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -12,6 +14,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.metamechanists.metalib.MetaLib;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
@@ -20,6 +23,7 @@ import static io.github.bakedlibs.dough.items.ItemUtils.canStack;
 
 @SuppressWarnings("unused")
 public class ItemUtils {
+    private static final NamespacedKey cooldownKey = new NamespacedKey(MetaLib.getInstance(), "cooldown");
 
     public static ItemStack makeEnchanted(ItemStack itemStack) {
         final ItemMeta itemMeta = itemStack.getItemMeta();
@@ -107,5 +111,24 @@ public class ItemUtils {
         for (int slot : slots) {
             chestMenu.addItem(slot, itemStack, ChestMenuUtils.getEmptyClickHandler());
         }
+    }
+
+    public static boolean onCooldown(ItemStack itemStack) {
+        return itemStack.getItemMeta() == null
+                || PersistentDataAPI.getLong(itemStack.getItemMeta(), cooldownKey, System.currentTimeMillis()) > System.currentTimeMillis();
+    }
+    public static long getCooldown(ItemStack itemStack) {
+        return itemStack.getItemMeta() == null
+                ? 0
+                : PersistentDataAPI.getLong(itemStack.getItemMeta(), cooldownKey, 0);
+    }
+    public static void startCooldown(ItemStack itemStack, double seconds) {
+        final ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta == null) {
+            return;
+        }
+
+        PersistentDataAPI.setLong(itemMeta, cooldownKey, System.currentTimeMillis() + (long) (seconds * 1000));
+        itemStack.setItemMeta(itemMeta);
     }
 }
