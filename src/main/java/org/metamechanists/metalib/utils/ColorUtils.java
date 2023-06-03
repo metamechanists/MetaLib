@@ -15,6 +15,7 @@ public class ColorUtils {
     private static final Map<String, String> colorMap = new HashMap<>();
 
     public static final String MM_ORANGE = ColorUtils.addHexColor("MM_ORANGE", "FFDE75");
+    public static final String MM_YELLOW = ColorUtils.addHexColor("MM_YELLOW", "D4A94C");
     public static final String MM_LIGHT_BLUE = ColorUtils.addHexColor("MM_LIGHT_BLUE", "9DC3E6");
     public static final String MM_GRAY = ColorUtils.addHexColor("MM_GRAY", "ADB9CA");
     public static final String MM_BROWN = ColorUtils.addHexColor("MM_BROWN", "996666");

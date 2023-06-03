@@ -9,14 +9,6 @@ import org.bukkit.inventory.ItemStack;
 
 @SuppressWarnings("unused")
 public class ParticleAnimations {
-    public static void experienceSiphon(Location location) {
-        ParticleUtils.sphereOut(location, Particle.TOTEM, 0.2, true);
-    }
-
-    public static void reinforcedComposter(Location location) {
-        ParticleUtils.randomParticle(location, Particle.SQUID_INK, 0.5, 5);
-    }
-
     public static void enchantingBottle(Location location) {
         final double scale = 0.3;
         for (double[] offsets : ParticleUtils.getSphere()) {
