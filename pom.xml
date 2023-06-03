@@ -6,7 +6,7 @@
 
     <groupId>org.metamechanists</groupId>
     <artifactId>MetaLib</artifactId>
-    <version>29</version>
+    <version>30</version>
     <packaging>jar</packaging>
 
     <name>MetaLib</name>
@@ -32,11 +32,11 @@
                         </relocation>
                         <relocation>
                             <pattern>dev.sefiraat.sefilib</pattern>
-                            <shadedPattern>org.metamechanists.metamachines.sefilib</shadedPattern>
+                            <shadedPattern>org.metamechanists.metalib.sefilib</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>de.tr7zw.changeme.nbtapi</pattern>
-                            <shadedPattern>org.metamechanists.metamachines.nbtapi</shadedPattern>
+                            <shadedPattern>org.metamechanists.metalib.nbtapi</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>
