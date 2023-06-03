@@ -1,6 +1,8 @@
 package org.metamechanists.metalib.utils;
 
 import io.github.bakedlibs.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -99,5 +101,11 @@ public class ItemUtils {
             }
         }
         return id.toString();
+    }
+
+    public static void fillMenuSlots(ChestMenu chestMenu, int[] slots, ItemStack itemStack) {
+        for (int slot : slots) {
+            chestMenu.addItem(slot, itemStack, ChestMenuUtils.getEmptyClickHandler());
+        }
     }
 }
