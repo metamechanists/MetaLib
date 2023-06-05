@@ -11,13 +11,11 @@ public class LanguageStorage {
 
     private final Plugin plugin;
     private final YamlTraverser languageTraverser;
-    private final String prefix;
 
     public LanguageStorage(Plugin plugin) {
         plugin.saveResource("language.yml", true);
         this.plugin = plugin;
         this.languageTraverser = new YamlTraverser(plugin, "language.yml");
-        this.prefix = getLanguageEntry("general.prefix");
     }
 
     @SafeVarargs
@@ -50,22 +48,16 @@ public class LanguageStorage {
     }
 
     @SafeVarargs
-    public final String getLanguageEntry(String path, boolean usePrefix, PlaceholderPair<Object>... args) {
-        final String messagePrefix = usePrefix ? prefix : "";
-        final String rawMessage = languageTraverser.get(path);
-        if (rawMessage == null) {
+    public final String getLanguageEntry(String path, PlaceholderPair<Object>... args) {
+        String message = languageTraverser.get(path);
+        if (message == null) {
+            plugin.getLogger().severe("Language file entry missing: " + path);
             return ChatColor.RED + "Language file entry missing. Contact a server admin and show them this message!";
         }
 
-        String message = messagePrefix + rawMessage;
         message = fillPlaceholders(message, args);
         message = ColorUtils.formatColors(message);
         message = fillColors(message);
         return message;
-    }
-
-    @SafeVarargs
-    public final String getLanguageEntry(String path, PlaceholderPair<Object>... args) {
-        return getLanguageEntry(path, false, args);
     }
 }
