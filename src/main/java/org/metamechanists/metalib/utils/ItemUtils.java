@@ -19,7 +19,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.metamechanists.metalib.MetaLib;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

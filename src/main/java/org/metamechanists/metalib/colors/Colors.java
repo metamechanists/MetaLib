@@ -55,6 +55,17 @@ public enum Colors {
 
     public final TextColor color;
 
+    private static final LegacyComponentSerializer ampersandSerializer = LegacyComponentSerializer.builder()
+            .character('&')
+            .hexColors()
+            .useUnusualXRepeatedCharacterHexFormat()
+            .build();
+    private static final LegacyComponentSerializer sectionSerializer = LegacyComponentSerializer.builder()
+            .character('§')
+            .hexColors()
+            .useUnusualXRepeatedCharacterHexFormat()
+            .build();
+
     Colors(int hex) {
          color = TextColor.color(hex);
     }
@@ -68,11 +79,11 @@ public enum Colors {
     }
 
     public String legacySection() {
-        return LegacyComponentSerializer.legacySection().serialize(Component.text("", color));
+        return sectionSerializer.serialize(Component.text("", color));
     }
 
     public String legacyAmpersand() {
-        return LegacyComponentSerializer.legacyAmpersand().serialize(Component.text("", color)
-                        .decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        return ampersandSerializer.serialize(Component.text("", color)
+                .decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
     }
 }
