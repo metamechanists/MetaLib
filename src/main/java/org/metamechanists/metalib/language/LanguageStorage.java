@@ -18,11 +18,11 @@ public class LanguageStorage {
         this.languageTraverser = new YamlTraverser(plugin, "language.yml");
     }
 
-    @SafeVarargs
-    private String fillPlaceholders(String message, PlaceholderPair<Object>... args) {
-        for (PlaceholderPair<Object> placeholderInfo : args) {
-            final String key = placeholderInfo.key();
-            final Object rawValue = placeholderInfo.value();
+    private String fillPlaceholders(String message, Object... placeholders) {
+        int i = 1;
+        for (Object rawValue : placeholders) {
+            final String key = "{" + i + "}";
+            i++;
 
             if (rawValue instanceof Player value) {
                 message = message.replace("{" + key + "}", value.getName());
@@ -47,15 +47,14 @@ public class LanguageStorage {
         return message;
     }
 
-    @SafeVarargs
-    public final String getLanguageEntry(String path, PlaceholderPair<Object>... args) {
+    public final String getLanguageEntry(String path, Object... placeholders) {
         String message = languageTraverser.get(path);
         if (message == null) {
             plugin.getLogger().severe("Language file entry missing: " + path);
             return ChatColor.RED + "Language file entry missing. Contact a server admin and show them this message!";
         }
 
-        message = fillPlaceholders(message, args);
+        message = fillPlaceholders(message, placeholders);
         message = ColorUtils.formatColors(message);
         message = fillColors(message);
         return message;
