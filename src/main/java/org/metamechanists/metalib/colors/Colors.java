@@ -16,6 +16,7 @@ public enum Colors {
     DARK_PURPLE(NamedTextColor.DARK_PURPLE),
     GOLD(NamedTextColor.GOLD),
     GRAY(NamedTextColor.GRAY),
+    DARK_GRAY(NamedTextColor.DARK_GRAY),
     BLUE(NamedTextColor.BLUE),
     LIGHT_GREEN(NamedTextColor.GREEN),
     AQUA(NamedTextColor.AQUA),
