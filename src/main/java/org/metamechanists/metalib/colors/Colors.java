@@ -34,7 +34,7 @@ public enum Colors {
     LIGHT_BLUE(0x7692C2),
     BROWN(0x865D49);
 
-    private final TextColor color;
+    public final TextColor color;
 
     Colors(int hex) {
          color = TextColor.color(hex);
