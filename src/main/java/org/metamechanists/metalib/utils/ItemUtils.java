@@ -137,7 +137,7 @@ public class ItemUtils {
 
     public static void setName(ItemStack stack, Component component) {
         ItemMeta meta = stack.getItemMeta();
-        meta.displayName(component);
+        meta.displayName(component.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
         stack.setItemMeta(meta);
     }
 
