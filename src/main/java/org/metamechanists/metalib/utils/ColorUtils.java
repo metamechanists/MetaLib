@@ -1,8 +1,10 @@
 package org.metamechanists.metalib.utils;
 
 import lombok.Getter;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,5 +55,9 @@ public class ColorUtils {
             return null;
         }
         return color;
+    }
+
+    public static String getLegacyHexColor(String name) {
+        return LegacyComponentSerializer.legacySection().serialize(Component.text().color(getHexColor(name)).build());
     }
 }
