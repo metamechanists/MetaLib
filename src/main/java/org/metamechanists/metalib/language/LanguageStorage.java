@@ -6,16 +6,18 @@ import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.metamechanists.metalib.colors.Colors;
+import org.metamechanists.metalib.utils.ColorUtils;
 import org.metamechanists.metalib.yaml.YamlTraverser;
 
 @SuppressWarnings("unused")
 public class LanguageStorage {
 
+    private final Plugin plugin;
     private final YamlTraverser languageTraverser;
 
     public LanguageStorage(Plugin plugin) {
         plugin.saveResource("language.yml", true);
+        this.plugin = plugin;
         this.languageTraverser = new YamlTraverser(plugin, "language.yml");
     }
 
@@ -30,12 +32,8 @@ public class LanguageStorage {
                 message = message.replace("{" + i + "}", value.toString());
             } else if (rawValue instanceof Double value) {
                 message = message.replace("{" + i + "}", value.toString());
-            } else if (rawValue instanceof Component value) {
-                message = message.replace("{" + i + "}", MiniMessage.miniMessage().serialize(value));
-            } else if (rawValue instanceof Colors value) {
-                message = message.replace("{" + i + "}", value.tag());
             } else {
-                throw new RuntimeException("Could not substitute placeholder of type " + rawValue.getClass());
+                plugin.getLogger().severe("Could not substitute placeholder of type " + rawValue.getClass());
             }
 
             i++;
@@ -45,8 +43,8 @@ public class LanguageStorage {
     }
 
     private String fillColors(String message) {
-        for (Colors colors : Colors.values()) {
-            message = message.replace("{" + colors.name() + "}", colors.tag());
+        for (var colorPair : ColorUtils.getColorMap().entrySet()) {
+            message = message.replace("{" + colorPair.getKey() + "}", colorPair.getValue());
         }
         return message;
     }
@@ -59,6 +57,7 @@ public class LanguageStorage {
         }
 
         message = fillPlaceholders(message, placeholders);
+        message = ColorUtils.formatColors(message);
         message = fillColors(message);
         return MiniMessage.miniMessage().deserialize(message);
     }
