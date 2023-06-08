@@ -21,20 +21,19 @@ public class LanguageStorage {
     private String fillPlaceholders(String message, Object... placeholders) {
         int i = 1;
         for (Object rawValue : placeholders) {
-            final String key = "{" + i + "}";
-            i++;
-
             if (rawValue instanceof Player value) {
-                message = message.replace("{" + key + "}", value.getName());
+                message = message.replace("{" + i + "}", value.getName());
             } else if (rawValue instanceof String value) {
-                message = message.replace("{" + key + "}", value);
+                message = message.replace("{" + i + "}", value);
             } else if (rawValue instanceof Integer value) {
-                message = message.replace("{" + key + "}", value.toString());
+                message = message.replace("{" + i + "}", value.toString());
             } else if (rawValue instanceof Double value) {
-                message = message.replace("{" + key + "}", value.toString());
+                message = message.replace("{" + i + "}", value.toString());
             } else {
                 plugin.getLogger().severe("Could not substitute placeholder of type " + rawValue.getClass());
             }
+
+            i++;
         }
 
         return message;
