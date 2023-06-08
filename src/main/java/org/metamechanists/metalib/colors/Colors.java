@@ -84,6 +84,6 @@ public enum Colors {
 
     public String legacyAmpersand() {
         ComponentLogger.logger().error(ampersandSerializer.serialize(Component.text("FUCK", color)));
-        return ampersandSerializer.serialize(Component.text("FUCK", color));
+        return ampersandSerializer.serialize(Component.text().color(color).build());
     }
 }
