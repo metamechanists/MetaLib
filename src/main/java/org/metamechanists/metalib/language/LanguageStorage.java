@@ -12,12 +12,10 @@ import org.metamechanists.metalib.yaml.YamlTraverser;
 @SuppressWarnings("unused")
 public class LanguageStorage {
 
-    private final Plugin plugin;
     private final YamlTraverser languageTraverser;
 
     public LanguageStorage(Plugin plugin) {
         plugin.saveResource("language.yml", true);
-        this.plugin = plugin;
         this.languageTraverser = new YamlTraverser(plugin, "language.yml");
     }
 
@@ -35,7 +33,7 @@ public class LanguageStorage {
             } else if (rawValue instanceof Component value) {
                 message = message.replace("{" + i + "}", MiniMessage.miniMessage().serialize(value));
             } else {
-                plugin.getLogger().severe("Could not substitute placeholder of type " + rawValue.getClass());
+                throw new RuntimeException("Could not substitute placeholder of type " + rawValue.getClass());
             }
 
             i++;
