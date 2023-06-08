@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.metamechanists.metalib.MetaLib;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -142,7 +143,7 @@ public class ItemUtils {
     }
 
     public static void setLore(ItemStack stack, List<Component> components) {
-        components.forEach(component -> component.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        components.replaceAll(component -> component.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
         stack.lore(components);
     }
 }
