@@ -7,7 +7,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.metamechanists.metalib.utils.ColorUtils;
+import org.metamechanists.metalib.colors.Colors;
 import org.metamechanists.metalib.yaml.YamlTraverser;
 
 @SuppressWarnings("unused")
@@ -46,8 +46,8 @@ public class LanguageStorage {
     }
 
     private String fillColors(String message) {
-        for (var colorPair : ColorUtils.getColorMap().entrySet()) {
-            message = message.replace("{" + colorPair.getKey() + "}", colorPair.getValue().asHexString());
+        for (Colors colors : Colors.values()) {
+            message = message.replace("{" + colors.name() + "}", colors.tag());
         }
         return message;
     }
