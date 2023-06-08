@@ -44,7 +44,7 @@ public class LanguageStorage {
 
     private String fillColors(String message) {
         for (var colorPair : ColorUtils.getColorMap().entrySet()) {
-            message = message.replace("{" + colorPair.getKey() + "}", colorPair.getValue());
+            message = message.replace("{" + colorPair.getKey() + "}", colorPair.getValue().asHexString());
         }
         return message;
     }
@@ -57,7 +57,6 @@ public class LanguageStorage {
         }
 
         message = fillPlaceholders(message, placeholders);
-        message = ColorUtils.formatColors(message);
         message = fillColors(message);
         return MiniMessage.miniMessage().deserialize(message);
     }
