@@ -34,7 +34,7 @@ public class LanguageStorage {
             } else if (rawValue instanceof Double value) {
                 message = message.replace("{" + i + "}", value.toString());
             } else if (rawValue instanceof Component value) {
-                message = message.replace("{" + i + "}", LegacyComponentSerializer.legacySection().serialize(value));
+                message = message.replace("{" + i + "}", MiniMessage.miniMessage().serialize(value));
             } else {
                 plugin.getLogger().severe("Could not substitute placeholder of type " + rawValue.getClass());
             }
