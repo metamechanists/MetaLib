@@ -7,6 +7,7 @@ import java.util.Locale;
 
 public class ChatUtils {
     public static @Nonnull String humanize(@Nonnull String string) {
+        // Converts eg ENDER_DRAGON to Ender Dragon (in effect ID to name)
         StringBuilder builder = new StringBuilder();
         String[] segments = CommonPatterns.UNDERSCORE.split(string.toLowerCase(Locale.ROOT));
 

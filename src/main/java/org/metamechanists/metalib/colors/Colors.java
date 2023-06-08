@@ -69,4 +69,8 @@ public enum Colors {
     public String legacy() {
         return LegacyComponentSerializer.legacySection().serialize(Component.text().color(color).build());
     }
+
+    public String slimefun() {
+        return LegacyComponentSerializer.legacyAmpersand().serialize(Component.text().color(color).build());
+    }
 }
