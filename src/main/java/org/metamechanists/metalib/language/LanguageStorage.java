@@ -1,6 +1,9 @@
 package org.metamechanists.metalib.language;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.metamechanists.metalib.utils.ColorUtils;
@@ -46,16 +49,16 @@ public class LanguageStorage {
         return message;
     }
 
-    public final String getLanguageEntry(String path, Object... placeholders) {
+    public final Component getLanguageEntry(String path, Object... placeholders) {
         String message = languageTraverser.get(path);
         if (message == null) {
-            plugin.getLogger().severe("Language file entry missing: " + path);
-            return ChatColor.RED + "Language file entry missing. Contact a server admin and show them this message!";
+            ComponentLogger.logger().error("Language file entry missing: " + path);
+            return Component.text("Language file entry missing. Contact a server admin and show them this message!", NamedTextColor.RED);
         }
 
         message = fillPlaceholders(message, placeholders);
         message = ColorUtils.formatColors(message);
         message = fillColors(message);
-        return message;
+        return MiniMessage.miniMessage().deserialize(message);
     }
 }
