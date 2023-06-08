@@ -5,6 +5,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.data.persistent.Persis
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import lombok.NonNull;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -130,5 +131,11 @@ public class ItemUtils {
 
         PersistentDataAPI.setLong(itemMeta, cooldownKey, System.currentTimeMillis() + (long) (seconds * 1000));
         itemStack.setItemMeta(itemMeta);
+    }
+
+    public static void setName(ItemStack stack, Component component) {
+        ItemMeta meta = stack.getItemMeta();
+        meta.displayName(component);
+        stack.setItemMeta(meta);
     }
 }
