@@ -32,6 +32,8 @@ public class LanguageStorage {
                 message = message.replace("{" + i + "}", value.toString());
             } else if (rawValue instanceof Component value) {
                 message = message.replace("{" + i + "}", MiniMessage.miniMessage().serialize(value));
+            } else if (rawValue instanceof Colors value) {
+                message = message.replace("{" + i + "}", value.tag());
             } else {
                 throw new RuntimeException("Could not substitute placeholder of type " + rawValue.getClass());
             }
