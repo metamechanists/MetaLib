@@ -1,10 +1,7 @@
 package org.metamechanists.metalib.colors;
 
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 @SuppressWarnings("unused")
 public enum Colors {
@@ -55,17 +52,6 @@ public enum Colors {
 
     public final TextColor color;
 
-    private static final LegacyComponentSerializer ampersandSerializer = LegacyComponentSerializer.builder()
-            .character('&')
-            .hexColors()
-            .useUnusualXRepeatedCharacterHexFormat()
-            .build();
-    private static final LegacyComponentSerializer sectionSerializer = LegacyComponentSerializer.builder()
-            .character('§')
-            .hexColors()
-            .useUnusualXRepeatedCharacterHexFormat()
-            .build();
-
     Colors(int hex) {
          color = TextColor.color(hex);
     }
@@ -78,12 +64,20 @@ public enum Colors {
         return "<" + color.asHexString() + ">";
     }
 
+    private String serialize(char separator) {
+        final String rawHex = color.asHexString().substring(1, 7);
+        final StringBuilder colorStringBuilder = new StringBuilder(separator + "x");
+        for (char character : rawHex.toCharArray()) {
+            colorStringBuilder.append(separator).append(character);
+        }
+        return colorStringBuilder.toString();
+    }
+
     public String legacySection() {
-        return sectionSerializer.serialize(Component.text("", color));
+        return serialize('§');
     }
 
     public String legacyAmpersand() {
-        ComponentLogger.logger().error(ampersandSerializer.serialize(Component.text("FUCK", color)));
-        return ampersandSerializer.serialize(Component.text().color(color).build());
+        return serialize('&');
     }
 }
