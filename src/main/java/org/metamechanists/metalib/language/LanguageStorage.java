@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.metamechanists.metalib.utils.ColorUtils;
@@ -32,6 +33,8 @@ public class LanguageStorage {
                 message = message.replace("{" + i + "}", value.toString());
             } else if (rawValue instanceof Double value) {
                 message = message.replace("{" + i + "}", value.toString());
+            } else if (rawValue instanceof Component value) {
+                message = message.replace("{" + i + "}", LegacyComponentSerializer.legacyAmpersand().serialize(value));
             } else {
                 plugin.getLogger().severe("Could not substitute placeholder of type " + rawValue.getClass());
             }
