@@ -6,6 +6,7 @@ import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import lombok.NonNull;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -19,6 +20,7 @@ import org.metamechanists.metalib.MetaLib;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
+import java.util.List;
 
 import static io.github.bakedlibs.dough.items.ItemUtils.canStack;
 
@@ -137,5 +139,10 @@ public class ItemUtils {
         ItemMeta meta = stack.getItemMeta();
         meta.displayName(component);
         stack.setItemMeta(meta);
+    }
+
+    public static void setLore(ItemStack stack, List<Component> components) {
+        components.forEach(component -> component.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        stack.lore(components);
     }
 }

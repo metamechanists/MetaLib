@@ -3,6 +3,7 @@ package org.metamechanists.metalib.colors;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 @SuppressWarnings("unused")
@@ -66,11 +67,12 @@ public enum Colors {
         return "<" + color.asHexString() + ">";
     }
 
-    public String legacy() {
-        return LegacyComponentSerializer.legacySection().serialize(Component.text().color(color).build());
+    public String legacySection() {
+        return LegacyComponentSerializer.legacySection().serialize(Component.text("", color));
     }
 
-    public String slimefun() {
-        return LegacyComponentSerializer.legacyAmpersand().serialize(Component.text().color(color).build());
+    public String legacyAmpersand() {
+        return LegacyComponentSerializer.legacyAmpersand().serialize(Component.text("", color)
+                        .decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
     }
 }
