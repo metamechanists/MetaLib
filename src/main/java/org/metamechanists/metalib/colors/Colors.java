@@ -3,7 +3,7 @@ package org.metamechanists.metalib.colors;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 @SuppressWarnings("unused")
@@ -83,7 +83,7 @@ public enum Colors {
     }
 
     public String legacyAmpersand() {
-        return ampersandSerializer.serialize(Component.text("", color)
-                .decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        ComponentLogger.logger().error(ampersandSerializer.serialize(Component.text("FUCK", color)));
+        return ampersandSerializer.serialize(Component.text("FUCK", color));
     }
 }
