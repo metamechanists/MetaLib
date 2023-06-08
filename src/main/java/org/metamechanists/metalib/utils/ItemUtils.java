@@ -135,10 +135,14 @@ public class ItemUtils {
         itemStack.setItemMeta(itemMeta);
     }
 
-    public static void removeDefaultItalics(Component component) {
-        component.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE);
+    public static void setName(ItemStack stack, Component component) {
+        ItemMeta meta = stack.getItemMeta();
+        meta.displayName(component);
+        stack.setItemMeta(meta);
     }
-    public static void removeDefaultItalics(List<Component> components) {
-        components.forEach(ItemUtils::removeDefaultItalics);
+
+    public static void setLore(ItemStack stack, List<Component> components) {
+        components.forEach(component -> component.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        stack.lore(components);
     }
 }
