@@ -45,6 +45,10 @@ public class LanguageStorage {
         return message;
     }
 
+    public final void sendLanguageMessage(Player player, String path, Object... placeholders) {
+        player.sendMessage(getLanguageEntry(path, placeholders));
+    }
+
     public final String getLanguageEntry(String path, Object... placeholders) {
         String message = languageTraverser.get(path);
         if (message == null) {
