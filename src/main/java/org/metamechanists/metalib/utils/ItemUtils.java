@@ -38,6 +38,15 @@ public class ItemUtils {
     }
 
     @ParametersAreNonnullByDefault
+    public static void addOrDropItemMainHand(Player player, ItemStack itemStack) {
+        if (player.getInventory().getItemInMainHand().getType().isEmpty()) {
+            player.getInventory().setItemInMainHand(itemStack);
+            return;
+        }
+        addOrDropItem(player, itemStack);
+    }
+
+    @ParametersAreNonnullByDefault
     public static void addOrDropItem(Player player, ItemStack... itemStacks) {
         final HashMap<Integer, ItemStack> remaining = player.getInventory().addItem(itemStacks);
         if (remaining.size() > 0) {
