@@ -14,7 +14,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.metamechanists.metalib.MetaLib;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
@@ -23,7 +22,7 @@ import static io.github.bakedlibs.dough.items.ItemUtils.canStack;
 
 @SuppressWarnings("unused")
 public class ItemUtils {
-    private static final NamespacedKey cooldownKey = new NamespacedKey(MetaLib.getInstance(), "cooldown");
+    private static final NamespacedKey cooldownKey = new NamespacedKey("metalib", "cooldown");
 
     public static ItemStack makeEnchanted(ItemStack itemStack) {
         final ItemMeta itemMeta = itemStack.getItemMeta();
