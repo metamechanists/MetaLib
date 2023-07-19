@@ -10,11 +10,6 @@ import org.bukkit.NamespacedKey;
 import org.metamechanists.metalib.MetaLib;
 
 public class SlimefunUtils {
-    private static ItemGroup errorGroup() {
-        return new ItemGroup(
-                new NamespacedKey(MetaLib.getInstance(), "error_group"),
-                new CustomItemStack(Material.BARRIER, "&cError Group"));
-    }
 
     public static ItemGroup getItemGroup(String id) {
         final String[] pair = id.split(":");
@@ -25,7 +20,7 @@ public class SlimefunUtils {
                 return itemGroup;
             }
         }
-        return errorGroup();
+        return null;
     }
 
     private static SlimefunItemStack errorItemStack(String id) {
