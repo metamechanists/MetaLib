@@ -6,7 +6,7 @@
 
     <groupId>org.metamechanists</groupId>
     <artifactId>MetaLib</artifactId>
-    <version>46</version>
+    <version>47</version>
     <packaging>jar</packaging>
 
     <name>MetaLib</name>
@@ -41,6 +41,10 @@
                         <relocation>
                             <pattern>org.bstats</pattern>
                             <shadedPattern>org.metamechanists.metalib.bstats</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>io.github.skytasul.glowingentities</pattern>
+                            <shadedPattern>org.metamechanists.metalib.glowingentities</shadedPattern>
                         </relocation>
                     </relocations>
                     <filters>
@@ -164,6 +168,13 @@
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
             <version>3.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.skytasul</groupId>
+            <artifactId>glowingentities</artifactId>
+            <version>1.3</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

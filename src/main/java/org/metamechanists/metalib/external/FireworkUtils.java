@@ -1,9 +1,3 @@
-
-
-/*
- * Copyright (C) 2022 Idra - All Rights Reserved
- */
-
 package org.metamechanists.metalib.external;
 
 import org.bukkit.Bukkit;
@@ -15,6 +9,8 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+// https://github.com/BlvckBytes/IsolatedFireworkEffects
 
 @SuppressWarnings("all")
 public class FireworkUtils {
