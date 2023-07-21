@@ -8,7 +8,7 @@ import github.scarsz.discordsrv.util.DiscordUtil;
 @SuppressWarnings("unused")
 public class DiscordUtils {
     public static final String ANNOUNCEMENTS_CHANNEL = "announcements";
-    public static final String DEV_LOG_CHANNEL = "global";
+    public static final String ALERTS_CHANNEL = "alerts";
 
     public static TextChannel getTextChannel(String channelId) {
         return DiscordSRV.getPlugin().getDestinationTextChannelForGameChannelName(channelId);
