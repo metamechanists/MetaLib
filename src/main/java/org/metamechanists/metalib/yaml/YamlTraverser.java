@@ -1,5 +1,6 @@
 package org.metamechanists.metalib.yaml;
 
+import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,6 +20,7 @@ public class YamlTraverser {
     }
 
     private final Plugin plugin;
+    @Getter
     private final ConfigurationSection section;
     private final String rootName;
 
