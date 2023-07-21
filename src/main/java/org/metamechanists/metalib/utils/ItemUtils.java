@@ -143,7 +143,7 @@ public class ItemUtils {
 
     public static ItemStack itemStackFromId(final String id) {
         final Material material = Material.getMaterial(id.toUpperCase());
-        final SlimefunItem slimefunItem = SlimefunItem.getById(id);
+        final SlimefunItem slimefunItem = SlimefunItem.getById(id.toUpperCase());
         if (material != null) {
             return new ItemStack(material);
         }
