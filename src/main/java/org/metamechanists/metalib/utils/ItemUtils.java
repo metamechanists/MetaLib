@@ -1,6 +1,7 @@
 package org.metamechanists.metalib.utils;
 
 import io.github.bakedlibs.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.data.persistent.PersistentDataAPI;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import lombok.NonNull;
@@ -138,5 +139,17 @@ public class ItemUtils {
 
         PersistentDataAPI.setLong(itemMeta, cooldownKey, System.currentTimeMillis() + (long) (seconds * 1000));
         itemStack.setItemMeta(itemMeta);
+    }
+
+    public static ItemStack itemStackFromId(final String id) {
+        final Material material = Material.getMaterial(id.toUpperCase());
+        final SlimefunItem slimefunItem = SlimefunItem.getById(id);
+        if (material != null) {
+            return new ItemStack(material);
+        }
+        if (slimefunItem != null) {
+            return slimefunItem.getItem();
+        }
+        return null;
     }
 }
