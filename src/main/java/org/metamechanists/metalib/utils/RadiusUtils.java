@@ -7,8 +7,12 @@ import org.metamechanists.metalib.interfaces.BlockRunnable;
 public class RadiusUtils {
 
     public static void forEachSquareRadius(Block centerBlock, int radius, BlockRunnable runnable) {
-        for (int x = -radius; x <= radius; x++) {
-            for (int z = -radius; z <= radius; z++) {
+        forEachRectangularRadius(centerBlock, radius, radius, runnable);
+    }
+
+    public static void forEachRectangularRadius(Block centerBlock, int xRadius, int zRadius, BlockRunnable runnable) {
+        for (int x = -xRadius; x <= xRadius; x++) {
+            for (int z = -zRadius; z <= zRadius; z++) {
                 if (runnable.run(centerBlock.getRelative(x, 0, z))) {
                     return;
                 }
@@ -27,8 +31,12 @@ public class RadiusUtils {
     }
 
     public static void forEachCubeRadius(Block centerBlock, int radius, BlockRunnable runnable) {
-        forEachSquareRadius(centerBlock, radius, block -> {
-            for (int y = -radius; y <= radius; y++) {
+        forEachRectangularPrismRadius(centerBlock, radius, radius, radius, runnable);
+    }
+
+    public static void forEachRectangularPrismRadius(Block centerBlock, int xRadius, int yRadius, int zRadius, BlockRunnable runnable) {
+        forEachRectangularRadius(centerBlock, xRadius, zRadius, block -> {
+            for (int y = -yRadius; y <= yRadius; y++) {
                 if (runnable.run(block.getRelative(0, y, 0))) {
                     return true;
                 }
