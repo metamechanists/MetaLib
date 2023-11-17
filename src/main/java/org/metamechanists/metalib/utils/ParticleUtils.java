@@ -1,10 +1,12 @@
 package org.metamechanists.metalib.utils;
 
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nullable;
@@ -14,6 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("unused")
 public class ParticleUtils {
+    @Getter
     private static final double[][] sphere = new double[7 * 6 * 2][];
 
     static {
@@ -28,10 +31,6 @@ public class ParticleUtils {
                 sphereLoc++;
             }
         }
-    }
-
-    public static double[][] getSphere() {
-        return sphere;
     }
 
     private static Vector generateRandomOffset(boolean setRandom) {
@@ -51,23 +50,62 @@ public class ParticleUtils {
     }
 
     @ParametersAreNonnullByDefault
+    public static void outlineBoundingBox(Player player, BoundingBox box, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
+        // Define all the points
+        final Vector bottomBackLeft = new Vector(box.getMinX(), box.getMinY(), box.getMinZ());
+        final Vector bottomBackRight = new Vector(box.getMinX(), box.getMinY(), box.getMaxZ());
+        final Vector bottomFrontLeft = new Vector(box.getMaxX(), box.getMinY(), box.getMinZ());
+        final Vector bottomFrontRight = new Vector(box.getMaxX(), box.getMinY(), box.getMaxZ());
+        final Vector topBackLeft = new Vector(box.getMinX(), box.getMaxY(), box.getMinZ());
+        final Vector topBackRight = new Vector(box.getMinX(), box.getMaxY(), box.getMaxZ());
+        final Vector topFrontLeft = new Vector(box.getMaxX(), box.getMaxY(), box.getMinZ());
+        final Vector topFrontRight = new Vector(box.getMaxX(), box.getMaxY(), box.getMaxZ());
+
+        // Bottom Lines
+        drawLine(player, bottomBackLeft, bottomFrontLeft, space, particle, dustOptions);
+        drawLine(player, bottomBackRight, bottomFrontRight, space, particle, dustOptions);
+        drawLine(player, bottomBackLeft, bottomBackRight, space, particle, dustOptions);
+        drawLine(player, bottomFrontLeft, bottomFrontRight, space, particle, dustOptions);
+        // Vertical Lines
+        drawLine(player, bottomBackLeft, topBackLeft, space, particle, dustOptions);
+        drawLine(player, bottomFrontLeft, topFrontLeft, space, particle, dustOptions);
+        drawLine(player, bottomBackRight, topBackRight, space, particle, dustOptions);
+        drawLine(player, bottomFrontRight, topFrontRight, space, particle, dustOptions);
+        // Top Lines
+        drawLine(player, topBackLeft, topFrontLeft, space, particle, dustOptions);
+        drawLine(player, topBackRight, topFrontRight, space, particle, dustOptions);
+        drawLine(player, topBackLeft, topBackRight, space, particle, dustOptions);
+        drawLine(player, topFrontLeft, topFrontRight, space, particle, dustOptions);
+    }
+
+    @Deprecated(forRemoval = true)
+    @ParametersAreNonnullByDefault
     public static void drawLine(Player player, Particle particle, Location start, Location end, double space, @Nullable Particle.DustOptions dustOptions) {
+        drawLine(player, start.toVector(), end.toVector(), space, particle, dustOptions);
+    }
+
+    @ParametersAreNonnullByDefault
+    public static void drawLine(Player player, Location start, Location end, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
+        drawLine(player, start.toVector(), end.toVector(), space, particle, dustOptions);
+    }
+
+    @ParametersAreNonnullByDefault
+    public static void drawLine(Player player, Vector start, Vector end, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
         final double distance = start.distance(end);
         double currentPoint = 0;
-        final Vector startVector = start.toVector();
-        final Vector endVector = end.toVector();
-        final Vector vector = endVector.clone().subtract(startVector).normalize().multiply(space);
+        final Vector step = end.clone().subtract(start).normalize().multiply(space);
 
         while (currentPoint < distance) {
             if (dustOptions != null) {
-                player.spawnParticle(particle, startVector.getX(), startVector.getY(), startVector.getZ(), 1, dustOptions);
+                player.spawnParticle(particle, start.getX(), start.getY(), start.getZ(), 1, dustOptions);
             } else {
-                player.spawnParticle(particle, startVector.getX(), startVector.getY(), startVector.getZ(), 1);
+                player.spawnParticle(particle, start.getX(), start.getY(), start.getZ(), 1);
             }
             currentPoint += space;
-            startVector.add(vector);
+            start.add(step);
         }
     }
+
     public static void highlightBlock(Player player, Block block, Particle particle, Particle.DustOptions dustOptions) {
         drawSquareCorners(player, block.getLocation(), 1, particle, dustOptions);
         drawSquareCorners(player, block.getLocation().add(0, 1, 0), 1, particle, dustOptions);
