@@ -51,7 +51,7 @@ public class ParticleUtils {
 
     @ParametersAreNonnullByDefault
     public static void outlineBlock(Player player, Block block, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
-        outlineBox(player, block.getX(), block.getY(), block.getZ(), block.getX() + 1, block.getY() + 1, block.getZ() + 1, space, particle, dustOptions);
+        outlineBox(player, block.getX(), block.getY(), block.getZ(), block.getX() + 1D, block.getY() + 1D, block.getZ() + 1D, space, particle, dustOptions);
     }
 
     @ParametersAreNonnullByDefault
@@ -60,7 +60,7 @@ public class ParticleUtils {
     }
 
     @ParametersAreNonnullByDefault
-    public static void outlineBox(Player player, int lowerX, int lowerY, int lowerZ, int upperX, int upperY, int upperZ, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
+    public static void outlineBox(Player player, double lowerX, double lowerY, double lowerZ, double upperX, double upperY, double upperZ, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
         // Define all the points
         final Vector bottomBackLeft = new Vector(lowerX, lowerY, lowerZ);
         final Vector bottomBackRight = new Vector(lowerX, lowerY, upperZ);
