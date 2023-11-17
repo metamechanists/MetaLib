@@ -50,16 +50,26 @@ public class ParticleUtils {
     }
 
     @ParametersAreNonnullByDefault
-    public static void outlineBoundingBox(Player player, BoundingBox box, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
+    public static void outlineBlock(Player player, Block block, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
+        outlineBox(player, block.getX(), block.getY(), block.getZ(), block.getX() + 1, block.getY() + 1, block.getZ() + 1, space, particle, dustOptions);
+    }
+
+    @ParametersAreNonnullByDefault
+    public static void outlineBox(Player player, BoundingBox box, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
+        outlineBox(player, (int) box.getMinX(), (int) box.getMinY(), (int) box.getMinZ(), (int) box.getMaxX(), (int) box.getMaxY(), (int) box.getMaxZ(), space, particle, dustOptions);
+    }
+
+    @ParametersAreNonnullByDefault
+    public static void outlineBox(Player player, int lowerX, int lowerY, int lowerZ, int upperX, int upperY, int upperZ, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
         // Define all the points
-        final Vector bottomBackLeft = new Vector(box.getMinX(), box.getMinY(), box.getMinZ());
-        final Vector bottomBackRight = new Vector(box.getMinX(), box.getMinY(), box.getMaxZ());
-        final Vector bottomFrontLeft = new Vector(box.getMaxX(), box.getMinY(), box.getMinZ());
-        final Vector bottomFrontRight = new Vector(box.getMaxX(), box.getMinY(), box.getMaxZ());
-        final Vector topBackLeft = new Vector(box.getMinX(), box.getMaxY(), box.getMinZ());
-        final Vector topBackRight = new Vector(box.getMinX(), box.getMaxY(), box.getMaxZ());
-        final Vector topFrontLeft = new Vector(box.getMaxX(), box.getMaxY(), box.getMinZ());
-        final Vector topFrontRight = new Vector(box.getMaxX(), box.getMaxY(), box.getMaxZ());
+        final Vector bottomBackLeft = new Vector(lowerX, lowerY, lowerZ);
+        final Vector bottomBackRight = new Vector(lowerX, lowerY, upperZ);
+        final Vector bottomFrontLeft = new Vector(upperX, lowerY, lowerZ);
+        final Vector bottomFrontRight = new Vector(upperX, lowerY, upperZ);
+        final Vector topBackLeft = new Vector(lowerX, upperY, lowerZ);
+        final Vector topBackRight = new Vector(lowerX, upperY, upperZ);
+        final Vector topFrontLeft = new Vector(upperX, upperY, lowerZ);
+        final Vector topFrontRight = new Vector(upperX, upperY, upperZ);
 
         // Bottom Lines
         drawLine(player, bottomBackLeft, bottomFrontLeft, space, particle, dustOptions);
@@ -78,6 +88,9 @@ public class ParticleUtils {
         drawLine(player, topFrontLeft, topFrontRight, space, particle, dustOptions);
     }
 
+    /**
+     * @deprecated The order of arguments is weird, use {@link ParticleUtils#drawLine(Player, Location, Location, double, Particle, Particle.DustOptions)}
+     **/
     @Deprecated(forRemoval = true)
     @ParametersAreNonnullByDefault
     public static void drawLine(Player player, Particle particle, Location start, Location end, double space, @Nullable Particle.DustOptions dustOptions) {
@@ -106,10 +119,19 @@ public class ParticleUtils {
         }
     }
 
+    /**
+     * @deprecated The order of arguments is weird, use {@link ParticleUtils#highlightBlockCorners(Player, Block, Particle, Particle.DustOptions)}
+     **/
+    @Deprecated(forRemoval = true)
     public static void highlightBlock(Player player, Block block, Particle particle, Particle.DustOptions dustOptions) {
+        highlightBlockCorners(player, block, particle, dustOptions);
+    }
+
+    public static void highlightBlockCorners(Player player, Block block, Particle particle, Particle.DustOptions dustOptions) {
         drawSquareCorners(player, block.getLocation(), 1, particle, dustOptions);
         drawSquareCorners(player, block.getLocation().add(0, 1, 0), 1, particle, dustOptions);
     }
+
     public static void drawSquareCorners(Player player, Location corner, int length, Particle particle, Particle.DustOptions dustOptions) {
         player.spawnParticle(particle, corner.getX(), corner.getY(), corner.getZ(), 1, dustOptions);
         player.spawnParticle(particle, corner.getX() + length, corner.getY(), corner.getZ(), 1, dustOptions);
