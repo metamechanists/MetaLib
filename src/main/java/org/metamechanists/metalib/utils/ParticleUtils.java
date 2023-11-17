@@ -107,6 +107,7 @@ public class ParticleUtils {
         final double distance = start.distance(end);
         double currentPoint = 0;
         final Vector step = end.clone().subtract(start).normalize().multiply(space);
+        start = start.clone();
 
         while (currentPoint < distance) {
             if (dustOptions != null) {
