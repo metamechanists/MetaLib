@@ -38,14 +38,23 @@ public class ParticleUtils {
     }
 
     public static void randomParticle(Location location, Particle particle, double radius, int count) {
-        for(int i = 0; i < count; ++i) {
-            randomParticle(location, particle, radius);
+        randomParticle(location, particle, radius, radius, radius, count);
+    }
+
+    public static void randomParticle(Location location, Particle particle, double xRadius, double yRadius, double zRadius, int count) {
+        for (int i = 0; i < count; ++i) {
+            randomParticle(location, particle, xRadius, yRadius, zRadius);
         }
     }
+
     public static void randomParticle(Location location, Particle particle, double radius) {
-        double x = ThreadLocalRandom.current().nextDouble(-radius, radius + 0.1);
-        double y = ThreadLocalRandom.current().nextDouble(-radius, radius + 0.1);
-        double z = ThreadLocalRandom.current().nextDouble(-radius, radius + 0.1);
+        randomParticle(location, particle, radius, radius, radius);
+    }
+
+    public static void randomParticle(Location location, Particle particle, double xRadius, double yRadius, double zRadius) {
+        double x = ThreadLocalRandom.current().nextDouble(-xRadius, xRadius + 0.1);
+        double y = ThreadLocalRandom.current().nextDouble(-yRadius, yRadius + 0.1);
+        double z = ThreadLocalRandom.current().nextDouble(-zRadius, zRadius + 0.1);
         location.getWorld().spawnParticle(particle, location.clone().add(x, y, z), 0, 0, 0, 0, 0);
     }
 
