@@ -28,6 +28,7 @@ public class ColorUtils {
     public static final String DYE_WHITE = ColorUtils.addHexColor("DYE_WHITE", "A9E7FF");
     public static final String DYE_DARK = ColorUtils.addHexColor("DYE_DARK", "53C6EF");
     public static final String PIG_PINK = ColorUtils.addHexColor("PIG_PINK", "FFAAEB");
+    public static final String ZINC_BLUE = ColorUtils.addHexColor("ZINC_BLUE", "477A87");
     public static final String NETWORKS_QUANTUM_CYAN = ColorUtils.addHexColor("NETWORKS_QUANTUM_CYAN", "3295a8");
     public static final String SOUL_LIGHT_BLUE = ColorUtils.addHexColor("SOUL_LIGHT_BLUE", "CDEEEE");
     public static final String AURELIUM_SKILL_ITEM_BLUE = ColorUtils.addHexColor("AURELIUM_SKILL_ITEM_BLUE", "6798E6");

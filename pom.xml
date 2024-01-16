@@ -6,7 +6,7 @@
 
     <groupId>org.metamechanists</groupId>
     <artifactId>MetaLib</artifactId>
-    <version>63</version>
+    <version>64</version>
     <packaging>jar</packaging>
 
     <name>MetaLib</name>
