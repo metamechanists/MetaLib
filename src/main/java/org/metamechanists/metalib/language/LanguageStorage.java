@@ -28,6 +28,8 @@ public class LanguageStorage {
                 message = message.replace("{" + i + "}", value.toString());
             } else if (rawValue instanceof Double value) {
                 message = message.replace("{" + i + "}", value.toString());
+            } else if (rawValue instanceof Float value) {
+                message = message.replace("{" + i + "}", value.toString());
             } else {
                 plugin.getLogger().severe("Could not substitute placeholder of type " + rawValue.getClass());
             }
