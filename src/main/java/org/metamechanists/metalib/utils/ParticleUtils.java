@@ -112,8 +112,17 @@ public class ParticleUtils {
     }
 
     @ParametersAreNonnullByDefault
+    public static void drawLine(Player player, Location start, Location end, double space, Particle particle, @Nullable Particle.DustOptions dustOptions, double distance) {
+        drawLine(player, start.toVector(), end.toVector(), space, particle, dustOptions, distance);
+    }
+
+    @ParametersAreNonnullByDefault
     public static void drawLine(Player player, Vector start, Vector end, double space, Particle particle, @Nullable Particle.DustOptions dustOptions) {
-        final double distance = start.distance(end);
+        drawLine(player, start, end, space, particle, dustOptions, start.distance(end));
+    }
+
+    @ParametersAreNonnullByDefault
+    public static void drawLine(Player player, Vector start, Vector end, double space, Particle particle, @Nullable Particle.DustOptions dustOptions, double distance) {
         double currentPoint = 0;
         final Vector step = end.clone().subtract(start).normalize().multiply(space);
         start = start.clone();
