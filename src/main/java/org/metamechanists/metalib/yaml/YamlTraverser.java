@@ -5,6 +5,9 @@ import lombok.NonNull;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3d;
+import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -67,6 +70,10 @@ public class YamlTraverser {
     public String name() {
         return section.getName();
     }
+    public String path() {
+        return section.getCurrentPath();
+    }
+
     @SuppressWarnings("unchecked")
     public <T> @Nullable T get(String key, ErrorSetting errorSetting) {
         if (errorSetting == ErrorSetting.LOG_MISSING_KEY && section.get(key) == null) {
@@ -83,6 +90,17 @@ public class YamlTraverser {
     }
     public <T> @Nullable T get(String key) {
         return get(key, ErrorSetting.LOG_MISSING_KEY);
+    }
+    public @NotNull Vector3d getVector3d(String key) {
+        List<Double> rotationList = get(key, ErrorSetting.LOG_MISSING_KEY);
+        if (rotationList.size() != 3) {
+            plugin.getLogger().severe("Vector at " + rootName + "." + section.getCurrentPath() + "." + key + " does not have 3 elements");
+        }
+        return new Vector3d(rotationList.get(0), rotationList.get(1), rotationList.get(2));
+    }
+    public @NotNull Vector3f getVector3f(String key) {
+        Vector3d asVector3d = getVector3d(key);
+        return new Vector3f((float) asVector3d.x, (float) asVector3d.y, (float) asVector3d.z);
     }
 
     public <T> void set(String key, T value) {
