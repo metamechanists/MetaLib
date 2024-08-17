@@ -50,8 +50,11 @@ public class YamlTraverser {
     }
 
     public @Nullable YamlTraverser getSection(String key, ErrorSetting errorSetting) {
-        if (errorSetting == ErrorSetting.LOG_MISSING_KEY && section.getConfigurationSection(key) == null) {
-            logMissingKey(key);
+        if (section.getConfigurationSection(key) == null) {
+            if (errorSetting == ErrorSetting.LOG_MISSING_KEY) {
+                logMissingKey(key);
+            }
+            return null;
         }
         return new YamlTraverser(plugin, section.getConfigurationSection(key), rootName);
     }
