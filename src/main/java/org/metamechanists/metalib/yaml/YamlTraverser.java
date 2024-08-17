@@ -94,6 +94,17 @@ public class YamlTraverser {
     public <T> @Nullable T get(String key) {
         return get(key, ErrorSetting.LOG_MISSING_KEY);
     }
+    @Nullable public Character getChar(String key, ErrorSetting errorSetting) {
+        CharSequence sequence = get(key, errorSetting);
+        if (sequence == null ) {
+            return null;
+        }
+        if (sequence.length() != 1) {
+            plugin.getLogger().severe("Value at " + rootName + "." + section.getCurrentPath() + "." + key + " is not a single character");
+            return null;
+        }
+        return sequence.charAt(0);
+    }
     public @NotNull Vector3d getVector3d(String key, ErrorSetting errorSetting) {
         List<Double> rotationList = get(key, errorSetting);
         if (rotationList.size() != 3) {
