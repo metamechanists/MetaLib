@@ -105,6 +105,9 @@ public class YamlTraverser {
         }
         return sequence.charAt(0);
     }
+    @Nullable public Character getChar(String key) {
+        return getChar(key, ErrorSetting.LOG_MISSING_KEY);
+    }
     public @NotNull Vector3d getVector3d(String key, ErrorSetting errorSetting) {
         List<Double> rotationList = get(key, errorSetting);
         if (rotationList.size() != 3) {
@@ -112,9 +115,15 @@ public class YamlTraverser {
         }
         return new Vector3d(rotationList.get(0), rotationList.get(1), rotationList.get(2));
     }
+    public @NotNull Vector3d getVector3d(String key) {
+        return getVector3d(key, ErrorSetting.LOG_MISSING_KEY);
+    }
     public @NotNull Vector3f getVector3f(String key, ErrorSetting errorSetting) {
         Vector3d asVector3d = getVector3d(key, errorSetting);
         return new Vector3f((float) asVector3d.x, (float) asVector3d.y, (float) asVector3d.z);
+    }
+    public @NotNull Vector3f getVector3f(String key) {
+        return getVector3f(key, ErrorSetting.LOG_MISSING_KEY);
     }
 
     public <T> void set(String key, T value) {
