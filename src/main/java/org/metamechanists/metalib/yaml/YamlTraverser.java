@@ -2,6 +2,7 @@ package org.metamechanists.metalib.yaml;
 
 import lombok.Getter;
 import lombok.NonNull;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -124,6 +125,16 @@ public class YamlTraverser {
     }
     public @NotNull Vector3f getVector3f(String key) {
         return getVector3f(key, ErrorSetting.LOG_MISSING_KEY);
+    }
+    public @NotNull TextColor getTextColor(String key, ErrorSetting errorSetting) {
+        List<Integer> colorList = get(key, errorSetting);
+        if (colorList.size() != 3) {
+            plugin.getLogger().severe("Color at " + rootName + "." + section.getCurrentPath() + "." + key + " does not have 3 elements");
+        }
+        return TextColor.color(colorList.get(0), colorList.get(1), colorList.get(2));
+    }
+    public @NotNull TextColor getTextColor(String key) {
+        return getTextColor(key, ErrorSetting.LOG_MISSING_KEY);
     }
 
     public <T> void set(String key, T value) {
