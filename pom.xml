@@ -6,7 +6,7 @@
 
     <groupId>org.metamechanists</groupId>
     <artifactId>MetaLib</artifactId>
-    <version>73</version>
+    <version>74</version>
     <packaging>jar</packaging>
 
     <name>MetaLib</name>
@@ -27,7 +27,7 @@
                 <configuration>
                     <relocations>
                         <relocation>
-                            <pattern>io.github.bakedlibs.dough</pattern>
+                            <pattern>com.github.bakedlibs.dough</pattern>
                             <shadedPattern>org.metamechanists.metalib.dough</shadedPattern>
                         </relocation>
                         <relocation>
@@ -43,7 +43,7 @@
                             <shadedPattern>org.metamechanists.metalib.bstats</shadedPattern>
                         </relocation>
                         <relocation>
-                            <pattern>io.github.skytasul.glowingentities</pattern>
+                            <pattern>fr.skytasul.glowingentities</pattern>
                             <shadedPattern>org.metamechanists.metalib.glowingentities</shadedPattern>
                         </relocation>
                     </relocations>
@@ -144,9 +144,9 @@
         <!-- Compile Time Dependencies -->
 
         <dependency>
-            <groupId>io.github.baked-libs</groupId>
+            <groupId>com.github.baked-libs.dough</groupId>
             <artifactId>dough-api</artifactId>
-            <version>1.2.0</version>
+            <version>f8ff25187d</version>
             <scope>compile</scope>
         </dependency>
 
@@ -172,9 +172,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.SkytAsul</groupId>
-            <artifactId>GlowingEntities</artifactId>
-            <version>1.3.1</version>
+            <groupId>fr.skytasul</groupId>
+            <artifactId>glowingentities</artifactId>
+            <version>1.3.5</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
