@@ -227,7 +227,6 @@ public class FireworkUtils {
     
     private String getBukkitVersionString() {
         String packageName = Bukkit.getServer().getClass().getPackage().getName();
-        Bukkit.getLogger().severe(packageName);
         return packageName.substring(packageName.lastIndexOf('.') + 1);
     }
 
@@ -248,7 +247,7 @@ public class FireworkUtils {
     }
     
     private int getMinorVersion(String versionString) {
-        String[] versionData = versionString.split("_");
+        String[] versionData = versionString.split("\\.");
         return Integer.parseInt(versionData[1]);
     }
     
