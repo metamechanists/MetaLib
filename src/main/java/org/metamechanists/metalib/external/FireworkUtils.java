@@ -227,9 +227,10 @@ public class FireworkUtils {
     
     private String getBukkitVersionString() {
         String packageName = Bukkit.getServer().getClass().getPackage().getName();
+        Bukkit.getLogger().severe(packageName);
         return packageName.split("\\.")[3];
     }
-    
+
     private String getNMSVersionString() throws Exception {
         String version = searchInSelfAndInheritedClasses(Bukkit.getServer().getClass(), type -> {
             for (Field field : type.getDeclaredFields()) {
