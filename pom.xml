@@ -27,7 +27,7 @@
                 <configuration>
                     <relocations>
                         <relocation>
-                            <pattern>com.github.bakedlibs.dough</pattern>
+                            <pattern>io.github.bakedlibs.dough</pattern>
                             <shadedPattern>org.metamechanists.metalib.dough</shadedPattern>
                         </relocation>
                         <relocation>
