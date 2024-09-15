@@ -228,7 +228,7 @@ public class FireworkUtils {
     private String getBukkitVersionString() {
         String packageName = Bukkit.getServer().getClass().getPackage().getName();
         Bukkit.getLogger().severe(packageName);
-        return packageName.split("\\.")[3];
+        return packageName.substring(packageName.lastIndexOf('.') + 1);
     }
 
     private String getNMSVersionString() throws Exception {
